@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   file.addEventListener('change', async () => {
     const dataURL = URL.createObjectURL(file.files[0])
     const img = await loadImage(dataURL)
-    ctx.drawImage(img, 0, 0, 150, 150)
+    ctx.drawImage(img, 0, 0, 224, 224)
 
     const model = await modelPromise
 
     const prediction = tf.tidy(() => {
-      let input = tf.fromPixels(ctx.getImageData(0, 0, 150, 150))
+      let input = tf.fromPixels(ctx.getImageData(0, 0, 224, 224))
       input = tf.cast(input, 'float32').div(tf.scalar(255))
       input = input.expandDims()
       return model.predict(input).dataSync()[0]
