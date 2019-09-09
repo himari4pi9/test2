@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const model = await modelPromise
 
     const prediction = tf.tidy(() => {
+      console.log(typeof ctx.getImageData(0, 0, 224, 224))
+      console.log(ctx.getImageData(0, 0, 224, 224))
       let input = tf.fromPixels(ctx.getImageData(0, 0, 224, 224))
       input = tf.cast(input, 'float32').div(tf.scalar(255))
       input = input.expandDims()
